@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import './App.scss';
+import StatusDisplay from './components/StatusDisplay';
+import ButtonSet from './components/ButtonSet';
+import Utils from './utils/Utils';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  buttonChoices = [
+    {
+        dir: 'up'
+    },
+    {
+        dir: 'left'
+    },
+    {
+        dir: 'down'
+    },
+    {
+        dir: 'right'
+    }
+  ];
+
+  constructor() {
+    super();
+    this.state = {
+      buttonChoices: this.buttonChoices,
+      direction: Utils.getRandomItemFromArray(this.buttonChoices).dir
+    };
+  }
+
+  directionClick = (direction) =>  {
+    this.setState({
+      direction: direction
+    });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-body">
+          <StatusDisplay
+            direction = {this.state.direction}
+          ></StatusDisplay>
+          <ButtonSet
+            buttonClick = {(direction) => this.directionClick(direction)}
+            buttonChoices={this.state.buttonChoices}
+          ></ButtonSet>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
