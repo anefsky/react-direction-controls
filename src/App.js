@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.scss';
 import StatusDisplay from './components/StatusDisplay';
 import ButtonSet from './components/ButtonSet';
-import Utils from './utils/Utils';
+import Utils from './services/Utils';
 
 
 class App extends Component {
@@ -30,6 +30,7 @@ class App extends Component {
   }
 
   directionClick = (direction) =>  {
+    console.log('directionClick');
     this.setState({
       direction: direction
     });
